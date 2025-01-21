@@ -1,5 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: Pretendard;
+  font-weight: 400;
+  src: local("Pretendard Regular"),
+    url("./assets/fonts/Pretendard-Regular.woff") format("woff"),
+    url("./assets/fonts/Pretendard-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: Pretendard;
+  font-weight: 500;
+  src: local("Pretendard Medium"),
+    url("./assets/fonts/Pretendard-Medium.woff") format("woff"),
+    url("./assets/fonts/Pretendard-Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: Pretendard;
+  font-weight: 700;
+  src: local("Pretendard Bold"),
+    url("./assets/fonts/Pretendard-Bold.woff") format("woff"),
+    url("./assets/fonts/Pretendard-Bold.woff2") format("woff2");
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif,
+    Pretendard;
   line-height: 1.5;
   font-weight: 400;
 
@@ -67,3 +96,119 @@ button:focus-visible {
   }
 }
 
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  touch-action: pan-y;
+}
+
+body,
+html,
+.main .main_content {
+  overscroll-behavior: none !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+.main {
+  background: #fff;
+  font-family: "Pretendard";
+  letter-spacing: -0.08rem;
+  max-width: 100%;
+  margin: 0 auto;
+
+  height: 100%;
+  -webkit-overflow-scrolling: touch; /* 異붽� */
+}
+
+.App {
+  text-align: center;
+  background-color: #ffffff;
+  overflow-y: auto; /* �ㅽ겕濡ㅼ씠 蹂댁씠�꾨줉 �ㅼ젙 */
+}
+
+@media screen and (min-width: 840px) {
+  .main_content {
+    position: relative;
+    max-width: 80%;
+    margin: 0 auto;
+    min-height: 100vh;
+  }
+
+  .main_content:before {
+    content: " ";
+    position: absolute;
+    left: -1px;
+    top: 0;
+    bottom: 0;
+  }
+
+  .main_content:after {
+    content: " ";
+    position: absolute;
+    right: -1px;
+    top: 0;
+    bottom: 0;
+  }
+}
+
+.theme_box {
+  /*layout*/
+  display: flex;
+  width: 56px;
+  height: 29px;
+  padding: 7px 15px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  /*style*/
+  border-radius: 20px;
+  background: #6888ff;
+
+  /*font*/
+  color: #fff;
+  text-align: center;
+  font-family: "Pretendard Variable";
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.24px;
+}
+
+.daon_logo {
+  color: var(--Main2, #6888ff);
+  -webkit-text-stroke-width: 1;
+  -webkit-text-stroke-color: var(--Main2, #6888ff);
+  font-family: "Pretendard";
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  letter-spacing: -0.8px;
+}
+
+.header_option {
+  width: max-content;
+  display: flex;
+  align-items: center;
+
+  color: #4e5968;
+  font-family: "Pretendard Variable";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.48px;
+}
