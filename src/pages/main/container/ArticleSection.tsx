@@ -7,7 +7,7 @@ const ArticleSection = () => {
     <div className="">
       {testData.data.map((data) => (
         <>
-          <div className="mt-3"></div>
+          <div className="mt-2"></div>
           <ArticleBox
             main_img={data.main_img}
             theme="주간"

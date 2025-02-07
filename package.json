@@ -12,6 +12,7 @@
   "dependencies": {
     "@fontsource/pretendard": "^5.1.0",
     "@radix-ui/react-slot": "1.1.1",
+    "@turtless/turtles-design-system": "^1.0.0",
     "autoprefixer": "10.4.20",
     "class-variance-authority": "0.7.1",
     "path": "0.12.7",

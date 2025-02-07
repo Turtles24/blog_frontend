@@ -1,4 +1,4 @@
-import { MarginTop } from "@/containers/componenet/marginTop";
+import { MarginTop } from "@/containers/component/marginTop";
 import * as React from "react";
 import construction from "@/assets/construction.webp";
 
