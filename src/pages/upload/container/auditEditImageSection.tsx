@@ -1,13 +1,15 @@
-import { ImageDropzone } from '../component/ImageDropzone';
-import { ImagePreview } from '../component/ImagePreview';
-import { useImageManager } from '../hook/useImageManager';
-import { useEffect } from 'react';
+import { ImageDropzone } from "../component/ImageDropzone";
+import { ImagePreview } from "../component/ImagePreview";
+import { useImageManager } from "../hooks/useImageManager";
+import { useEffect } from "react";
 
 interface AuditEditImageSectionProps {
   onImagesChange: (images: File[]) => void;
 }
 
-export function AuditEditImageSection({ onImagesChange }: AuditEditImageSectionProps): JSX.Element {
+export function AuditEditImageSection({
+  onImagesChange,
+}: AuditEditImageSectionProps): JSX.Element {
   const { images, addImage, removeImage, getValidImages } = useImageManager();
 
   useEffect(() => {

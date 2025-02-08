@@ -1,5 +1,5 @@
-import { XCircle } from '@phosphor-icons/react';
-import { ManagedImage } from '../hook/useImageManager';
+import { XCircle } from "@phosphor-icons/react";
+import { ManagedImage } from "../hooks/useImageManager";
 
 interface ImagePreviewProps {
   imageItem: ManagedImage | string;
@@ -8,9 +8,18 @@ interface ImagePreviewProps {
   isThumbnail: boolean;
 }
 
-export function ImagePreview({ imageItem, onRemove, onClick, isThumbnail }: ImagePreviewProps) {
+export function ImagePreview({
+  imageItem,
+  onRemove,
+  onClick,
+  isThumbnail,
+}: ImagePreviewProps) {
   const fileURL =
-    typeof imageItem === 'string' ? imageItem : imageItem.image ? URL.createObjectURL(imageItem.image) : '';
+    typeof imageItem === "string"
+      ? imageItem
+      : imageItem.image
+      ? URL.createObjectURL(imageItem.image)
+      : "";
 
   return (
     <div
@@ -39,7 +48,12 @@ export function ImagePreview({ imageItem, onRemove, onClick, isThumbnail }: Imag
         >
           <div className="relative">
             <div className="absolute inset-0 m-auto h-[24px] w-[24px] rounded-full bg-white" />
-            <XCircle size={32} color="#2F4BF7" weight="fill" className="relative z-10" />
+            <XCircle
+              size={32}
+              color="#2F4BF7"
+              weight="fill"
+              className="relative z-10"
+            />
           </div>
         </button>
       )}

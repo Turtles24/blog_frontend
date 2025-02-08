@@ -1,12 +1,14 @@
-import { File as Data } from '@/types/apis/post';
-import { FileItem } from '../container/auditEditFilesSection';
+import { File as Data } from "@/@types/apis/post";
+import { FileItem } from "../container/auditEditFilesSection";
 
-const imageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+const imageExtensions = ["jpg", "jpeg", "png", "gif"];
 
 export function handleThumbnailImage(uploadedFiles: Data[]): string | null {
   return (
     uploadedFiles
-      .filter((file) => imageExtensions.some((ext) => file.url.toLowerCase().endsWith(ext)))
+      .filter((file) =>
+        imageExtensions.some((ext) => file.url.toLowerCase().endsWith(ext))
+      )
       .map((file) => file.url)[0] || null
   );
 }
@@ -23,7 +25,11 @@ export function removeFileField(
 ) {
   const newFiles = files.filter((_, i) => i !== index);
   setFiles(newFiles);
-  onFilesChange(newFiles.filter((fileItem) => fileItem.file !== null).map((fileItem) => fileItem.file as File));
+  onFilesChange(
+    newFiles
+      .filter((fileItem) => fileItem.file !== null)
+      .map((fileItem) => fileItem.file as File)
+  );
 }
 
 export function onDrop(
@@ -38,7 +44,9 @@ export function onDrop(
   newFiles[index].file = acceptedFiles[0];
   setFiles(newFiles);
 
-  const allFiles = newFiles.filter((fileItem) => fileItem.file !== null).map((fileItem) => fileItem.file as File);
+  const allFiles = newFiles
+    .filter((fileItem) => fileItem.file !== null)
+    .map((fileItem) => fileItem.file as File);
   onFilesChange(allFiles);
 
   const allFilled = newFiles.every((fileItem) => fileItem.file !== null);
@@ -47,7 +55,10 @@ export function onDrop(
   }
 }
 
-export function addEmptyField(files: FileItem[], setFiles: (files: FileItem[]) => void) {
+export function addEmptyField(
+  files: FileItem[],
+  setFiles: (files: FileItem[]) => void
+) {
   setFiles([...files, { id: Date.now(), file: null }]);
   console.log(files);
 }

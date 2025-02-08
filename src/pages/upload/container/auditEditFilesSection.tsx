@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { Trash, Plus } from '@phosphor-icons/react';
-import { FileDropzone } from '../component/fileDropzone';
-import { addEmptyField, onDrop, removeFileField } from '../utils/fileHandler';
+import { useState } from "react";
+import { Trash, Plus } from "@phosphor-icons/react";
+import { FileDropzone } from "@/pages/upload/component/fileDropzone";
+import { addEmptyField, onDrop, removeFileField } from "../utils/fileHandler";
 
 export interface FileItem {
   id: number;
@@ -13,8 +13,12 @@ interface AuditEditFilesSectionProps {
   files?: string[];
 }
 
-export function AuditEditFilesSection({ onFilesChange }: AuditEditFilesSectionProps) {
-  const [files, setFiles] = useState<FileItem[]>([{ id: Date.now(), file: null }]);
+export function AuditEditFilesSection({
+  onFilesChange,
+}: AuditEditFilesSectionProps) {
+  const [files, setFiles] = useState<FileItem[]>([
+    { id: Date.now(), file: null },
+  ]);
 
   return (
     <div className="flex flex-col items-center justify-center px-[200px] pt-[12px] xs:px-[30px] sm:px-[30px] md:px-[30px] lg:px-[30px]">
@@ -24,11 +28,23 @@ export function AuditEditFilesSection({ onFilesChange }: AuditEditFilesSectionPr
             <FileDropzone
               file={fileItem.file}
               onDrop={(acceptedFiles) =>
-                onDrop(acceptedFiles, index, files, setFiles, onFilesChange, () => addEmptyField(files, setFiles))
+                onDrop(
+                  acceptedFiles,
+                  index,
+                  files,
+                  setFiles,
+                  onFilesChange,
+                  () => addEmptyField(files, setFiles)
+                )
               }
             />
             {fileItem.file ? (
-              <button onClick={() => removeFileField(index, files, setFiles, onFilesChange)} className="mx-6">
+              <button
+                onClick={() =>
+                  removeFileField(index, files, setFiles, onFilesChange)
+                }
+                className="mx-6"
+              >
                 <Trash size={24} />
               </button>
             ) : (

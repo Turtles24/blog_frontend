@@ -128,3 +128,16 @@ a {
     bottom: 0;
   }
 }
+
+.title {
+  color: #000;
+  text-align: center;
+  -webkit-text-stroke-width: 1;
+  -webkit-text-stroke-color: #000;
+  font-family: "Gmarket Sans TTF";
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.24px;
+}

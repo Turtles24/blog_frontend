@@ -1,21 +1,18 @@
-import { patchBoardPosts } from "@/apis/patchBoardPosts";
-import {
-  patchBoardPostProps,
-  patchBoardPostsResponse,
-} from "@/types/patchBoardPosts";
+import { patchArticlesProps, patchArticlesRes } from "@/@types/apis/patch";
+import { patchArticles } from "@/apis/patchArticles";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export const usePatchBoardPosts = () => {
+export const usePatchArticles = () => {
   const queryClient = useQueryClient();
-  return useMutation<patchBoardPostsResponse, Error, patchBoardPostProps>({
-    mutationFn: (patchData: patchBoardPostProps) => patchBoardPosts(patchData),
+  return useMutation<patchArticlesRes, Error, patchArticlesProps>({
+    mutationFn: (patchData: patchArticlesProps) => patchArticles(patchData),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["getPetitionTopLiked"] });
+      queryClient.invalidateQueries({ queryKey: ["patchArticles"] });
       queryClient.invalidateQueries({
-        queryKey: ["get-board-boardCode-posts"],
+        queryKey: ["patch-articles"],
       });
       queryClient.refetchQueries({
-        queryKey: ["get-board-boardCode-posts-postId"],
+        queryKey: ["patch-articles"],
       });
     },
   });

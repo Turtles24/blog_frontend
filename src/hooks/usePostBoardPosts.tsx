@@ -1,5 +1,5 @@
 import { postBoardPosts, postBoardPostsProps } from "@/apis/postBoardPosts";
-import { PostBoardPostsResponse } from "@/types/apis/post";
+import { PostBoardPostsResponse } from "@/@types/apis/post";
 import {
   useMutation,
   UseMutationResult,
