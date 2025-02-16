@@ -7,7 +7,7 @@ import {
 } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
 
-export function useDelBoardPosts(): UseMutationResult<
+export function useDelArticles(): UseMutationResult<
   AxiosResponse<delArticlesRes>,
   AxiosError,
   delArticlesProps

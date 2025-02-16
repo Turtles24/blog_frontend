@@ -9,7 +9,7 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  optimizeDeps: {
-    include: ["@turtless/turtles-design-system"],
+  css: {
+    postcss: "./postcss.config.js",
   },
 });

@@ -32,3 +32,21 @@ export interface postArticleSearchResDto {
   title: string;
   subTitle: string;
 }
+
+export interface getArticlesDetailProps {
+  articleId: number | null;
+}
+
+export interface getArticlesDetailRes {
+  data: getArticlesDetailResDto[]; // ✅ 배열로 수정
+}
+
+export interface getArticlesDetailResDto {
+  articleId: number;
+  userName: string;
+  theme: string;
+  title: string;
+  content: string;
+  subTitle: string;
+  uploadDate: "string";
+}

@@ -192,9 +192,7 @@ a {
   -webkit-text-stroke-width: 1;
   -webkit-text-stroke-color: var(--Main2, #6888ff);
   font-family: "Pretendard";
-  font-size: 40px;
   font-style: normal;
-  font-weight: 800;
   line-height: normal;
   letter-spacing: -0.8px;
 }
@@ -206,9 +204,7 @@ a {
 
   color: #4e5968;
   font-family: "Pretendard Variable";
-  font-size: 24px;
   font-style: normal;
-  font-weight: 500;
   line-height: normal;
   letter-spacing: -0.48px;
 }

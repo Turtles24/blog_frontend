@@ -8,6 +8,7 @@ export const postArticlesTheme = async ({
   content,
   userName,
   subTitle,
+  postFileList,
 }: postArticlesProps): Promise<postArticlesRes> => {
   const response: AxiosResponse<postArticlesRes> = await clientAuth({
     url: `/articles`,
@@ -18,6 +19,7 @@ export const postArticlesTheme = async ({
       content,
       userName,
       subTitle,
+      postFileList,
     },
   });
 

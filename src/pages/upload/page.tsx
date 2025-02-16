@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { AuditEditFilesSection } from "./container/auditEditFilesSection";
 import { AuditEditImageSection } from "./container/auditEditImageSection";
 import { AuditEditTitleSection } from "./container/auditEditTitleSection";
@@ -7,28 +8,29 @@ import { useAuditEdit } from "./hooks/useAuditEdit";
 import { Header } from "@/containers/ui/header";
 import { Button } from "@/containers/ui/button";
 import { usePostArticlesTheme } from "@/hooks/apis/usePostArticlesTheme";
-import { useEffect } from "react";
-/*
-import { usePostArticlesFiles } from "@/hooks/apis/usePostArticlesFiles";
+import { usePostFiles } from "@/hooks/apis/usePostFiles";
 import { handleFileLists } from "./utils/fileHandler";
-*/
+import { useNavigate } from "react-router-dom"; // 페이지 이동을 위한 훅
 
 export function AuditEditPage() {
   const {
     handleTitleChange,
-    handleCategoryChange,
+    // handleCategoryChange,
     handleContentChange,
-    handleSubmit,
-    setFiles,
-    setImages,
+    //  handleSubmit,
     isLoading,
   } = useAuditEdit();
 
-  const mutation = usePostArticlesTheme();
-  /*
-  const { mutateAsync: uploadFiles } = usePostArticlesFiles();
-  */
+  const { mutateAsync: createPost } = usePostArticlesTheme();
+  const { mutateAsync: uploadFiles } = usePostFiles();
+  const navigate = useNavigate();
 
+  // 파일과 이미지를 저장할 상태
+  const [files, setFiles] = useState<File[]>([]);
+  const [images, setImages] = useState<File[]>([]);
+  const [category, setCategory] = useState<string>("");
+
+  /*초기 데이터 설정
   const data = {
     theme: "weekly",
     title: "ㅁㅇㄹㅁㄹㅁㅁㅇㅁㄹ",
@@ -43,58 +45,61 @@ export function AuditEditPage() {
     }
   }, []);
 
-  /*
+  */
 
-  const handleSubmit = async () => {
+  const handlePostSubmit = async () => {
     try {
       if (category === "") {
         alert("카테고리를 선택해주세요.");
         return;
       }
 
-      const uploadResponse = await uploadFiles({
-        articleId: "분실물게시판",
-        images,
+      const uploadResponse: postFilesRes = await uploadFiles({
+        files: [...files, ...images],
       });
 
-      const { postFiles, thumbnailUrl } = uploadResponse.data.data;
+      const { result: postFiles } = uploadResponse;
+      console.log("uploadResponse", uploadResponse);
+      console.log("postFiles", postFiles);
 
-      const thumbnailImage = thumbnailUrl;
       const postFileList = handleFileLists(postFiles);
+      console.log("postFileList", postFileList);
 
       await createPost({
-        boardCode: "분실물게시판",
-        post: {
-          title,
-          content,
-          categoryCode: category,
-          thumbNailImage: thumbnailImage,
-          isNotice: false,
-          postFileList,
-        },
+        theme: "weekly",
+        title: "ㅇㅁㅇㄹㅁㅁㄹㅁㄹ",
+        content: "ㅁㅇㄹㅁ ㄹㅁㄴ ",
+        userName: "ㅁㄹㅇㅁㄹㅇㅁ",
+        subTitle: "ㅁㄹㅇㅁㄹㅇㅁ",
+        postFileList,
       });
 
-      navigate(`/lost-article?category=state`);
-      window.location.reload();
+      navigate(`/`);
     } catch (e) {
       console.error(e);
     }
   };
-*/
+
   return (
     <>
       <Header />
       <AuditEditTitleSection
         onTitleChange={handleTitleChange}
-        onCategoryChange={handleCategoryChange}
+        onCategoryChange={setCategory}
         categoryList={["주간", "조직", "기술"]}
       />
       <AuditEditContentSection onContentChange={handleContentChange} />
       <AuditEditImageSection onImagesChange={setImages} />
       <AuditEditFilesSection onFilesChange={setFiles} />
-      <AuditEditSubmitButton onSubmit={handleSubmit} isLoading={isLoading} />
+      <AuditEditSubmitButton
+        onSubmit={handlePostSubmit}
+        isLoading={isLoading}
+      />
 
-      <Button onClick={handleSubmit} isLoading={isLoading} />
+      <Button />
+      <button onClick={handlePostSubmit} isLoading={isLoading}>
+        업로드
+      </button>
     </>
   );
 }

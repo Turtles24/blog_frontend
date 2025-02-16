@@ -1,10 +1,8 @@
-import testData from "@/assets/db/data.json";
 import { ArticleBox } from "@/component/ui/articleBox";
 import { ArticleMainTitle } from "@/component/ui/articleMainTitle";
 import { useGetArticlesTheme } from "@/hooks/apis/useGetArticlesTheme";
 import { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { usePostArticlesDetail } from "@/hooks/apis/usePostArticlesDetail";
 import { useNavigate } from "react-router-dom";
 
 const ArticleSection = () => {
@@ -26,13 +24,7 @@ const ArticleSection = () => {
     refetch,
   } = useGetArticlesTheme({ theme, page });
 
-  const mutation = usePostArticlesDetail();
-
-  useEffect(() => {
-    if (articleId !== undefined && !mutation.isSuccess) {
-      mutation.mutate({ articleId });
-    }
-  }, [articleId]);
+  console.log("articleId", articleId);
 
   useEffect(() => {
     if (!queryClient.getQueryData(["get-board-boardCode-posts-postId"])) {

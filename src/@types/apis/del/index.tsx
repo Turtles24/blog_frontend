@@ -1,5 +1,5 @@
 export interface delArticlesProps {
-  articleId: number;
+  articleId: number | null;
 }
 
 export interface delArticlesRes {

@@ -4,6 +4,7 @@ export interface postArticlesProps {
   content: string;
   userName: string;
   subTitle: string;
+  postFileList?: number[] | null;
 }
 
 export interface postArticlesRes {
@@ -20,27 +21,16 @@ export interface postArticleResDto {
   uploadDate: "string";
 }
 
-export interface postArticlesDetailProps {
-  articleId: number;
+export interface postFileProps {
+  files: File[]; // 실제 브라우저 File 객체 (Blob)
 }
 
-export interface postArticlesFileProps {
-  articleId: number;
-  files: [];
-}
-
-export interface File {
+export interface UploadedFile {
   fileId: number;
   fileUrl: string;
   fileName: string;
 }
 
-export interface postArticlesFilesRes {
-  articleId: number;
-  uploadedFiles: {
-    postFiles: File[];
-    thumbnailUrl: string;
-  };
-  isSuccess: boolean;
+export interface postFilesRes {
+  result: UploadedFile[];
 }
-

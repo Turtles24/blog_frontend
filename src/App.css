@@ -141,3 +141,7 @@ a {
   line-height: normal;
   letter-spacing: -0.24px;
 }
+
+.title_container {
+  margin-top: 100px;
+}

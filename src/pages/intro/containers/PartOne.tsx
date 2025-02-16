@@ -1,6 +1,6 @@
 import { getArticlesSearchRes } from "@/@types/apis/get";
 import { useGetArticlesSearch } from "@/hooks/apis/useGetArticlesSearch";
-import { useDelBoardPosts } from "@/hooks/useDelArticles";
+import { useDelArticles } from "@/hooks/useDelArticles";
 import { useEffect, useState } from "react";
 
 interface articleDeleteProps {
@@ -19,7 +19,7 @@ const PartOne = ({ articleId }: articleDeleteProps) => {
     keyword,
   });
 
-  const { mutate } = useDelBoardPosts();
+  const { mutate } = useDelArticles();
 
   const handleSearchClick = () => {
     setKeyword(inputValue);

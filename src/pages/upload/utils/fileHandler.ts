@@ -1,4 +1,4 @@
-import { File as Data } from "@/@types/apis/post";
+import { File as Data, UploadedFile } from "@/@types/apis/post";
 import { FileItem } from "../container/auditEditFilesSection";
 
 const imageExtensions = ["jpg", "jpeg", "png", "gif"];
@@ -13,8 +13,8 @@ export function handleThumbnailImage(uploadedFiles: Data[]): string | null {
   );
 }
 
-export function handleFileLists(uploadedFiles: Data[]): number[] {
-  return uploadedFiles.map((file) => file.id);
+export function handleFileLists(uploadedFiles: UploadedFile[]): number[] {
+  return uploadedFiles.map((file) => file.fileId); //
 }
 
 export function removeFileField(
