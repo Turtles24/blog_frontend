@@ -6,7 +6,7 @@ import {
 } from "@/@types/apis/patch/index";
 
 export const patchArticles = async ({
-  articleId,
+  articleId,   
   theme,
   title,
   content,
