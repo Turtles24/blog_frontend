@@ -12,6 +12,8 @@ export function AuditEditPage() {
     handleTitleChange,
     handleCategoryChange,
     handleContentChange,
+    handleNameChange,
+    handleSubTitleChange,
     setFiles,
     setImages,
     handlePostSubmit,
@@ -24,6 +26,8 @@ export function AuditEditPage() {
       <AuditEditTitleSection
         onTitleChange={handleTitleChange}
         onCategoryChange={handleCategoryChange}
+        onSubTitleChange={handleSubTitleChange}
+        onNameChange={handleNameChange}
         categoryList={["주간", "조직", "기술"]}
       />
       <AuditEditContentSection onContentChange={handleContentChange} />
