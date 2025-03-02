@@ -9,7 +9,7 @@ export function MainRouter() {
     <Routes>
       <Route path="/" element={<Main />} />
       <Route path="/detail" element={<Detail />} />
-      <Route path="/auditedit" element={<AuditEditPage />} />
+      <Route path="/upload" element={<AuditEditPage />} />
       <Route path="/intro" element={<Intro />} />
       <Route path="/articles/:articlesId" element={<Detail />} />
     </Routes>

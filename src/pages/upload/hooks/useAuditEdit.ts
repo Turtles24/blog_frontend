@@ -1,22 +1,32 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { usePostBoardFiles } from "@/hooks/usePostBoardFiles";
-import { usePostBoardPosts } from "@/hooks/usePostBoardPosts";
+import { usePostArticlesTheme } from "@/hooks/apis/usePostArticlesTheme";
+import { usePostFiles } from "@/hooks/apis/usePostFiles";
 import { handleFileLists } from "../utils/fileHandler";
+import { useNavigate } from "react-router-dom"; // 페이지 이동을 위한 훅
 
 export function useAuditEdit() {
   const navigate = useNavigate();
   const [files, setFiles] = useState<File[]>([]);
   const [images, setImages] = useState<File[]>([]);
   const [title, setTitle] = useState<string>("");
+  const [name, setName] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [content, setContent] = useState<string>("");
+  const [subTitle, setSubTitle] = useState<string>("");
 
-  const { mutateAsync: uploadFiles } = usePostBoardFiles();
-  const { mutateAsync: createPost, isLoading }: any = usePostBoardPosts();
+  const { mutateAsync: createPost, isLoading } = usePostArticlesTheme();
+  const { mutateAsync: uploadFiles } = usePostFiles();
 
   const handleTitleChange = (newTitle: string) => {
     setTitle(newTitle);
+  };
+
+  const handleNameChange = (newName: string) => {
+    setName(newName);
+  };
+
+  const handleSubTitleChange = (newSubTitle: string) => {
+    setSubTitle(newSubTitle);
   };
 
   const handleCategoryChange = (newCategory: string) => {
@@ -27,42 +37,34 @@ export function useAuditEdit() {
     setContent(newContent);
   };
 
-  const handleSubmit = async () => {
+  const handlePostSubmit = async () => {
     try {
-      if (images.length === 0) {
-        alert("이미지 파일을 1개 이상 추가해주세요.");
-        return;
-      }
       if (category === "") {
         alert("카테고리를 선택해주세요.");
         return;
       }
 
-      const uploadResponse = await uploadFiles({
-        boardCode: "감사기구게시판",
-        files,
-        images,
+      const uploadResponse: postFilesRes = await uploadFiles({
+        files: [...files, ...images],
       });
 
-      const { postFiles, thumbnailUrl } = uploadResponse.data.data;
+      const { result: postFiles } = uploadResponse;
+      console.log("uploadResponse", uploadResponse);
+      console.log("postFiles", postFiles);
 
-      const thumbnailImage = thumbnailUrl;
       const postFileList = handleFileLists(postFiles);
+      console.log("postFileList", postFileList);
 
       await createPost({
-        boardCode: "감사기구게시판",
-        post: {
-          title,
-          content,
-          categoryCode: category,
-          thumbNailImage: thumbnailImage,
-          isNotice: false,
-          postFileList,
-        },
+        theme: category,
+        title: title,
+        content: content,
+        userName: name,
+        subTitle: subTitle,
+        postFileList,
       });
 
-      navigate(`/audit?category=notice`);
-      window.location.reload();
+      navigate(`/`);
     } catch (e) {
       console.error(e);
     }
@@ -79,7 +81,9 @@ export function useAuditEdit() {
     handleTitleChange,
     handleCategoryChange,
     handleContentChange,
-    handleSubmit,
+    handlePostSubmit,
+    handleNameChange,
+    handleSubTitleChange,
     isLoading,
   };
 }

@@ -6,6 +6,7 @@ interface AuditEditTitleSectionProps {
   initialTitle?: string;
   initialCategory?: string;
   onTitleChange: (title: string) => void;
+  onSubTitleChange: (title: string) => void;
   onCategoryChange: (category: string) => void;
   categoryList: string[];
 }
@@ -14,10 +15,12 @@ export function AuditEditTitleSection({
   initialTitle = "",
   initialCategory = "",
   onTitleChange,
+  onSubTitleChange,
   onCategoryChange,
   categoryList,
 }: AuditEditTitleSectionProps) {
   const [title, setTitle] = useState<string>(initialTitle);
+  const [subTitle, setSubTitle] = useState<string>(initialTitle);
   const [category, setCategory] = useState<string>(initialCategory);
 
   const truncatedTitle = useTruncateText(title, 50);
@@ -27,6 +30,14 @@ export function AuditEditTitleSection({
     if (newTitle.length <= 50) {
       setTitle(newTitle);
       onTitleChange(newTitle);
+    }
+  };
+
+  const handleSubTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newSubTitle = event.target.value;
+    if (newSubTitle.length <= 50) {
+      setSubTitle(newSubTitle);
+      onSubTitleChange(newSubTitle);
     }
   };
 
@@ -43,6 +54,14 @@ export function AuditEditTitleSection({
           id="title"
           value={truncatedTitle}
           onChange={handleTitleChange}
+          className="w-full flex-1  rounded-xs border-[0.125rem] border-gray-300 px-3 py-[0.4rem] shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:text-sm"
+          placeholder="제목을 입력하세요"
+        />
+        <input
+          type="text"
+          id="subTitle"
+          value={truncatedTitle}
+          onChange={handleSubTitleChange}
           className="w-full flex-1 rounded-xs border-[0.125rem] border-gray-300 px-3 py-[0.4rem] shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:text-sm"
           placeholder="제목을 입력하세요"
         />
@@ -53,6 +72,24 @@ export function AuditEditTitleSection({
           optionValue={categoryList}
           onValueChange={handleCategoryChange}
           value={category}
+        />
+      </div>
+      <div className="mt-3 flex flex-row items-center justify-center gap-4 xs:flex-col xs:items-start xs:gap-1 sm:flex-col sm:items-start sm:gap-1">
+        <input
+          type="text"
+          id="title"
+          value={truncatedTitle}
+          onChange={handleTitleChange}
+          className="w-10/12 flex-1 rounded-xs border-[0.125rem] border-gray-300 px-3 py-[0.4rem] shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:text-sm"
+          placeholder="제목을 입력하세요"
+        />
+        <input
+          type="text"
+          id="subTitle"
+          value={truncatedTitle}
+          onChange={handleSubTitleChange}
+          className="w-2/12 flex-1 rounded-xs border-[0.125rem] border-gray-300 px-3 py-[0.4rem] shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:text-sm"
+          placeholder="제목을 입력하세요"
         />
       </div>
     </div>
