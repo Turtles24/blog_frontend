@@ -5,7 +5,11 @@ import { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
-const ArticleSection = () => {
+interface ArticleSectionProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  theme: string;
+}
+const ArticleSection = ({ theme }: ArticleSectionProps) => {
   const [articleData, setArticleData] = useState();
 
   const [articleId, setArticleId] = useState<number | undefined>();
@@ -14,7 +18,6 @@ const ArticleSection = () => {
 
   const queryClient = useQueryClient();
 
-  const theme: string = "weekly";
   const page: number = 1;
 
   const {
